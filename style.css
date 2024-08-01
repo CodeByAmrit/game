@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css?family=Kavoon');
+
+body,
+body>div {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+div {
+    /* border: 1px solid gray; */
+}
+
+a {
+    text-decoration: none;
+    color: white;
+
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #24d7e1 !important;
+    background-color: #001323 !important;
+}
+
+.navbarCustom {
+    position: absolute;
+    font-size: 22px;
+    font-family: kavoon;
+    top: 0;
+    height: 45px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+}
+
+.containerBody {
+    /* height: 80vh; */
+    width: 100%;
+    background-color: #001323;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* overflow-y: auto;
+    overflow-x: hidden; */
+
+}
+
+.ttt,
+.left {
+    width: 50%;
+    height: 100%;
+    display: flex;
+
+}
+
+.grid-container {
+    /* display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: auto auto auto;
+    background-color: #001323;
+    padding: 10px; */
+
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    background-color: #001323;
+}
+
+.PlayerImg {
+    width: 80px;
+    height: 80px;
+}
+
+#playerNameShow {
+    width: 150px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.grid-item {
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #002f56;
+    font-size: 30px;
+    text-align: center;
+    margin: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    min-height: 70px;
+    min-width: 70px; */
+
+    border-radius: 10px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #002f56;
+    cursor: pointer;
+
+
+
+}
+
+.PlayerImg {
+    width: 70%;
+
+}
+
+.grid-item:hover {
+    scale: 1.02;
+    background-color: #004176;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.inputsName {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type=text],
+select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    background-color: #002f56;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: white;
+    font-size: large;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    font-size: large;
+
+}
+
+input:focus {
+    outline: none;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+#gameDiv {
+    display: none;
+}
+
+#mainLogo {
+    max-height: 350px;
+    width: 100%;
+}
+
+#reload_btn {
+    display: none;
+}
+
+
+@media only screen and (max-width: 900px) {
+    .containerBody {
+        flex-direction: column;
+    }
+
+    .left,
+    .ttt {
+        width: 80%;
+    }
+
+    .containerBody {
+        height: auto;
+    }
+}

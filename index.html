@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="navbarCustom">
+        <div class="container" style="display: flex;height:fit-content; align-items: center;">
+            <a href="https://codebyamrit.github.io/"> <img src="https://codebyamrit.github.io/pic/logoMain.png"
+                    alt="logo" width="30px" height="30px" style="margin-right:15px;"></a>
+            CodeByAmrit
+        </div>
+    </div>
+    <div class="container containerBody .d-md-flex">
+        <div class="left" id="left">
+            <div>
+                <h4 style="margin-bottom:0;">Welcome To </h4>
+            </div>
+            <div>
+                <h1 style="color:white;margin-top:0;"><b>Tic Tak Toe</b></h1>
+            </div>
+            <div class="inputsName">
+                <label for="playerX">X - Player Name</label>
+                <input type="text" name="playerX" id="playerX" value="Player 1">
+            </div>
+            <div class="inputsName">
+                <label for="playerX">O - Player Name</label>
+                <input type="text" name="playerO" id="playerO" value="Computer">
+            </div>
+            <div class="inputsName">
+                <input type="submit" value="Play" id="playBtn">
+            </div>
+
+        </div>
+        <div id="playerNameShow" style="display: none;">Turn: Player_1</div>
+        <div class="ttt">
+            <div class="grid-container" id="gameDiv">
+                <div class="grid-item" onclick="makeMove(this, 0)"></div>
+                <div class="grid-item" onclick="makeMove(this, 1)"></div>
+                <div class="grid-item" onclick="makeMove(this, 2)"></div>
+                <div class="grid-item" onclick="makeMove(this, 3)"></div>
+                <div class="grid-item" onclick="makeMove(this, 4)"></div>
+                <div class="grid-item" onclick="makeMove(this, 5)"></div>
+                <div class="grid-item" onclick="makeMove(this, 6)"></div>
+                <div class="grid-item" onclick="makeMove(this, 7)"></div>
+                <div class="grid-item" onclick="makeMove(this, 8)"></div>
+            </div>
+            <img src="mainlogo.png" alt="logo" id="mainLogo">
+        </div>
+        <div class="btn btn-primary" onclick="reload()" id="reload_btn"> Play Again</div>
+        <div class="btn btn-secondary m-2" onclick="location.reload()" id="home_btn" style="display: none;"> Home</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
