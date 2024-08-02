@@ -1,82 +1,68 @@
+// DOM elements
 const entryAudio = document.getElementById('entryAudio')
 const clickAudio = document.getElementById('clickAudio')
 const scoreBoard = document.getElementById('scoreBoard')
+const playerXInput = document.getElementById('playerX')
+const playerOInput = document.getElementById('playerO')
+const playerNameShow = document.getElementById('playerNameShow')
+const playBtn = document.getElementById('playBtn')
+const leftSection = document.getElementById('left')
+const mainLogo = document.getElementById('mainLogo')
+const gameDiv = document.getElementById('gameDiv')
+const reloadBtn = document.getElementById('reload_btn')
+const homeBtn = document.getElementById('home_btn')
 
 let recordCounter = 1
 
-if (localStorage.getItem('player_x')) {
-  document.getElementById('playerX').value = localStorage.getItem('player_x')
-}
+// Fetch player names from input fields
+const playerXName = playerXInput.value || 'Player 1'
+const playerOName = playerOInput.value || 'Computer'
 
-localStorage.setItem('player_o', `${document.getElementById('playerO').value}`)
-localStorage.setItem('player_x', `${document.getElementById('playerX').value}`)
+// Initialize player names display
+playerNameShow.textContent = `Turn: ${playerXName}`
 
-const playerXName = localStorage.getItem('player_x') || 'Player 1'
-const playerOName = localStorage.getItem('player_o') || 'Computer'
-
-document.getElementById('playerNameShow').textContent = `Turn: ${
-  document.getElementById('playerX').value
-}`
-
-if (playerXName || playerOName) {
-  document.getElementById('playerX').value = playerXName
-  document.getElementById('playerO').value = playerOName
-}
-
-document.getElementById('playBtn').addEventListener('click', () => {
-  document.getElementById('playerNameShow').style.display = 'block'
+// Event listener for the play button
+playBtn.addEventListener('click', () => {
+  playerNameShow.style.display = 'block'
   entryAudio.play()
-  document.getElementById('playerNameShow').textContent = `Turn: ${
-    document.getElementById('playerX').value
-  }`
-  document.getElementById('playerNameShowDiv').style = 'flex'
-
-  document.getElementById('left').style.display = 'none'
-  document.getElementById('mainLogo').style.display = 'none'
-  document.getElementById('gameDiv').style.display = 'grid'
-  document.getElementById('reload_btn').style.display = 'flex'
+  playerNameShow.textContent = `Turn: ${playerXName}`
+  playerNameShowDiv.style.display = 'flex'
+  leftSection.style.display = 'none'
+  mainLogo.style.display = 'none'
+  gameDiv.style.display = 'grid'
+  reloadBtn.style.display = 'flex'
 })
 
+// Reload function to reset the game
 function reload () {
-  //   location.reload()
   resetGame()
 }
 
 let board = Array(9).fill(null)
 let currentPlayer = 'X'
 
+// Function to make a move
 async function makeMove (element, index) {
   await clickAudio.play()
   if (!board[index]) {
-    // audio
-
     board[index] = currentPlayer
     element.innerHTML = `<img src="${
       currentPlayer === 'X' ? 'images/close.png' : 'images/rec.png'
     }" alt="${currentPlayer}" class="PlayerImg">`
-    if (checkWinner()) {
-      document.getElementById('home_btn').style.display = 'flex'
-      document.getElementById('home_btn').innerText = `${
-        currentPlayer === 'X'
-          ? document.getElementById('playerX').value
-          : playerOName
-      } wins!`
 
-      if (currentPlayer === 'X') {
-        createScoreBoardRecord(true)
-      } else {
-        createScoreBoardRecord(false)
-      }
+    if (checkWinner()) {
+      homeBtn.style.display = 'flex'
+      homeBtn.innerText = `${
+        currentPlayer === 'X' ? playerXName : playerOName
+      } wins!`
+      createScoreBoardRecord(currentPlayer === 'X')
     } else if (board.every(cell => cell)) {
-      // alert("It's a tie!")
-      document.getElementById('home_btn').style.display = 'flex'
-      document.getElementById('home_btn').innerText = "It's a tie!"
+      homeBtn.style.display = 'flex'
+      homeBtn.innerText = "It's a tie!"
     } else {
       currentPlayer = currentPlayer === 'X' ? 'O' : 'X'
-      document.getElementById('playerNameShow').textContent = `Turn: ${
-        currentPlayer === 'X'
-          ? document.getElementById('playerX').value
-          : playerOName
+      playerNameShow.textContent = `Turn: ${
+        currentPlayer === 'X' ? playerXName : playerOName
       }`
       if (currentPlayer === 'O') {
         computerMove()
@@ -85,6 +71,7 @@ async function makeMove (element, index) {
   }
 }
 
+// Function for computer to make a move
 async function computerMove () {
   let emptyIndices = board
     .map((val, idx) => (val === null ? idx : null))
@@ -96,6 +83,7 @@ async function computerMove () {
   )
 }
 
+// Function to check for a winner
 function checkWinner () {
   const winPatterns = [
     [0, 1, 2],
@@ -112,40 +100,34 @@ function checkWinner () {
   )
 }
 
+// Function to reset the game
 function resetGame () {
   board.fill(null)
   document.querySelectorAll('.grid-item').forEach(item => (item.innerHTML = ''))
   currentPlayer = 'X'
-  document.getElementById('playerNameShow').textContent = `Turn: ${
-    document.getElementById('playerX').value
-  }`
-  document.getElementById('home_btn').style.display = 'none'
+  playerNameShow.textContent = `Turn: ${playerXName}`
+  homeBtn.style.display = 'none'
 }
 
+// Function to create a scoreboard record
 function createScoreBoardRecord (win) {
-  var currentdate = new Date()
-  var hours = currentdate.getHours()
-  var ampm = hours >= 12 ? 'PM' : 'AM'
-  var formattedTime = `${
-    hours >= 12 ? hours - 12 : hours
-  }:${currentdate.getMinutes()} ${ampm}`
-  var datetime =
-    currentdate.getDate() +
-    '/' +
-    (currentdate.getMonth() + 1) +
-    '/' +
-    currentdate.getFullYear() +
-    ' ' +
-    formattedTime
+  const now = new Date()
+  const hours = now.getHours()
+  const ampm = hours >= 12 ? 'PM' : 'AM'
+  const formattedTime = `${hours % 12 || 12}:${String(
+    now.getMinutes()
+  ).padStart(2, '0')} ${ampm}`
+  const datetime = `${now.getDate()}/${
+    now.getMonth() + 1
+  }/${now.getFullYear()} ${formattedTime}`
 
-  scoreBoard.innerHTML += ` <tr>
-                                      <th scope="row">${recordCounter}</th>
-                                      <td>${
-                                        document.getElementById('playerX').value
-                                      }</td>
-                                      <td>${datetime}</td>
-                                      <td>${win === true ? 'Win' : 'Loose'}</td>
-                                </tr>`
+  scoreBoard.innerHTML += `
+    <tr>
+      <th scope="row">${recordCounter}</th>
+      <td>${playerXName}</td>
+      <td>${datetime}</td>
+      <td>${win ? 'Win' : 'Loose'}</td>
+    </tr>`
 
   recordCounter++
 }
