@@ -1,12 +1,36 @@
 @import url('https://fonts.googleapis.com/css?family=Kavoon');
 
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    border-radius: 10px;
+}
+
 body,
 body>div {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 div {
-    /* border: 1px solid gray; */
+    /* border: 1px solid rgb(255, 255, 255); */
 }
 
 a {
@@ -18,7 +42,7 @@ a {
 body {
     padding: 0;
     margin: 0;
-    height: 100vh;
+    height: fit-content;
     width: 100vw;
     display: flex;
     align-items: center;
@@ -46,11 +70,9 @@ body {
     width: 100%;
     background-color: #001323;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: space-between;
-    /* overflow-y: auto;
-    overflow-x: hidden; */
-
+    margin-top: 7rem;
 }
 
 .ttt,
@@ -62,12 +84,6 @@ body {
 }
 
 .grid-container {
-    /* display: grid;
-    height: 100%;
-    width: 100%;
-    grid-template-columns: auto auto auto;
-    background-color: #001323;
-    padding: 10px; */
 
     display: grid;
     grid-template-columns: repeat(3, 100px);
@@ -78,15 +94,29 @@ body {
     background-color: #001323;
 }
 
+.alertPosition {
+    position: absolute !important;
+    top: 50px !important;
+}
+
 .PlayerImg {
     width: 80px;
     height: 80px;
 }
 
-#playerNameShow {
-    width: 150px;
+#scoreBoard {
+    max-height: 400px;
+}
+
+#playerNameShowDiv {
+    width: 100%;
+    height: 98%;
+    max-height: 300px;
     text-align: center;
-    margin-top: 20px;
+    margin-left: 20px;
+    font-size: larger;
+    overflow-y: auto;
+    border-radius: 5px;
 }
 
 .grid-item {
@@ -187,13 +217,18 @@ input[type=submit]:hover {
 
 
 @media only screen and (max-width: 900px) {
+    #playerNameShowDiv {
+        margin-top: 20px;
+        margin-left: 0px;
+    }
+
     .containerBody {
         flex-direction: column;
     }
 
     .left,
     .ttt {
-        width: 80%;
+        width: 100%;
     }
 
     .containerBody {
